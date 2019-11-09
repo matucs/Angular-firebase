@@ -1,4 +1,19 @@
-
+.pinktext{
+color: #FD659E
+}
+.centered {
+    position: absolute;
+    top: 20%;
+    left: 20%;
+    transform: translate(-20%, -20%);
+  }
+.menuicon {
+    border: 0px ;
+    padding: 2px;
+    border-radius: 1ch;
+    margin:2px 10px 5px 60px ;
+    background-color: white;
+}
 .boarderless {
     border-width: 0ch;
     }

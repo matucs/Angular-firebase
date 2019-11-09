@@ -1,59 +1,80 @@
 <div class="container">
-  <div class="card">
-    <div class="card-body">
-      This That Analytics
+  <div class="card boarderless">
+    <div class="container">
+      <div class="row">
+        <img class=" boarderless" [src]="icons.thisThat"
+          style="float: left; width: 40px; height: 40px;margin-right: 5px;" />
+        <h3 class="pinktext align-middle">This That Analytics</h3>
+      </div>
     </div>
   </div>
-  <div class="card">
-    <div class="card-body">
-      <a href="#">Dashboard</a>
-      <a href="#">Manage Polls</a>
-      <a href="#">Create Poll</a>
-      <a href="#">Poblish and Promote</a>
-      <a href="#">This That Messages</a>
+  <div class="card boarderless">
+    <div class="container">
+      <div class="row">
+        <div class="align-top menuicon">
+          <img [src]="icons.dashboard" />
+          <p style="text-align: center;"><small>Dashboard</small> </p>
+        </div>
+        <div class="align-top menuicon">
+          <img [src]="icons.managePoll" />
+          <p style="text-align: center;"><small>Manage Polls</small> </p>
+        </div>
+        <div class="align-top menuicon">
+          <img [src]="icons.createPoll" />
+          <p style="text-align: center;"><small>Create Poll</small> </p>
+        </div>
+        <div class="align-top menuicon">
+          <img [src]="icons.publishAndPromote" />
+          <p style="text-align: center;"><small>Publish and Promote</small> </p>
+        </div>
+        <div class="align-top menuicon">
+          <img [src]="icons.tT" />
+          <p style="text-align: center;"><small>This That Messages</small> </p>
+        </div>
+      </div>
     </div>
   </div>
   <div class="card pink">
     <div class="container">
       <div class="row">
         <div class="card col-md-4 pink boarderless" style="margin-top: 30px;">
-            <div class="card left-image boarderless ">
-                <div class="card-header boarderless " style="text-align: center; background-color: white;">
-                  <span class="badge badge-pill badge-light shadowedborder">Gold rims on the GT3 RS?</span>
-                  <span class="badge badge-pill shadowedborder">This</span>
-                </div>
-                <img class="img-thumbnail boarderless" [src]="imgUrl" />
-                <div class="card-footer boarderless" style="text-align: center; background-color: white;">
-                  <small class="card-text shadowedborder fontbold">Love them</small>
-                  <small class="card-text shadowedborder fontbold">Not a fan</small>
-                </div>
+          <div class="card left-image boarderless ">
+            <div class="card-header boarderless " style="text-align: center; background-color: white;">
+              <span class="badge badge-pill badge-light shadowedborder">Gold rims on the GT3 RS?</span>
+              <span class="badge badge-pill shadowedborder">This</span>
             </div>
-            <div class="card left-comment pink boarderless">
+            <img class="img-thumbnail boarderless" [src]="imgUrl" />
+            <div class="card-footer boarderless" style="text-align: center; background-color: white;">
+              <small class="card-text shadowedborder fontbold">Love them</small>
+              <small class="card-text shadowedborder fontbold">Not a fan</small>
+            </div>
+          </div>
+          <div class="card left-comment pink boarderless">
+            <div class="card shadowedborder">
+              <div class="card-body">
+                comments {{comments.length}}
+              </div>
+            </div>
+            <div *ngFor="let cmt of comments">
               <div class="card shadowedborder">
                 <div class="card-body">
-                  comments {{comments.length}}
-                </div>
-              </div>
-              <div *ngFor="let cmt of comments">
-                <div class="card shadowedborder">
-                  <div class="card-body">
-                    <div class="container">
-                      <div class="row">
-                        <div class="col-sm-4">
-                          <img [src]="cmt.user.img" style="width: 30px; height: 30px;border-radius: 50%;" />
-                        </div>
-                        <div class="col-sm-8">
-                          {{cmt.user.name}}
-                        </div>
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-sm-4">
+                        <img [src]="cmt.user.img" style="width: 30px; height: 30px;border-radius: 50%;" />
+                      </div>
+                      <div class="col-sm-8">
+                        {{cmt.user.name}}
                       </div>
                     </div>
-                    <div>
-                      {{cmt.content}}
-                    </div>
+                  </div>
+                  <div>
+                    {{cmt.content}}
                   </div>
                 </div>
               </div>
             </div>
+          </div>
         </div>
         <div class="card col-md-8 pink boarderless">
           <div class="card-body">
@@ -83,17 +104,45 @@
                   <div class="row">
                     <div class="card col-md-6 boarderless pink">
                       <div class="card shadowedborder">
-                        <small> votes<h3>{{votes}}</h3></small>
+                        <div class="container">
+                          <div class="row ">
+                            <div class="col-md-4 ">
+                              <img class="  boarderless " [src]="icons.tick"
+                                style="width: 40px; margin-left: 10px; margin-top: 20px;" />
+                            </div>
+                            <div class="col-md-8">
+                              <small> votes<h3>{{votes}}</h3></small>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                       <div class="card shadowedborder">
-                        <small> total reach in the past 7 days</small>
-                        <h3>6015</h3>
+                        <div class="container">
+                          <div class="row ">
+                            <div class="col-md-4 ">
+                              <img class="  boarderless " [src]="icons.total"
+                                style="width: 40px; margin-left: 10px; margin-top: 20px;" />
+                            </div>
+                            <div class="col-md-8">
+                              <small> total reach in the past 7 days</small>
+                              <h3>6015</h3>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                       <div class="card shadowedborder">
-                        <div class="card-body">
-                          <small>Audience gender</small>
-                          <h3>{{male}}:{{female}}</h3>
-                          <small class="text-muted">male female</small>
+                        <div class="container">
+                          <div class="row ">
+                            <div class="col-md-4 ">
+                              <img class="  boarderless " [src]="icons.gender"
+                                style="width: 40px; margin-left: 10px; margin-top: 20px;" />
+                            </div>
+                            <div class="col-md-8">
+                              <small>Audience gender</small>
+                              <h3>{{male}}:{{female}}</h3>
+                              <small class="text-muted">male female</small>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -101,20 +150,48 @@
                       <div class="card boarderless pink">
                         <div class="container">
                           <div class="row">
-                            <div class="card  col-md-5 col-sm-5 col-xs-5  shadowedborder">
-                              <h2>TT</h2>
+                            <div class="card  col-md-5 col-sm-5 col-xs-5  shadowedborder ">
+                              <img class=" boarderless " [src]="icons.tT" style="width: 60px; margin-left: 30px;" />
                             </div>
                             <div class="card  col-md-5 col-sm-5 col-xs-5  shadowedborder">
-                              <h2>Thread</h2>
+                              <div class="container">
+                                <div class="row">
+                                  <img class=" boarderless " [src]="icons.thread"
+                                    style="width: 20px; margin-left: 10px;" />
+                                  <h6 style="margin-left: 20px;">Thread</h6>
+                                </div>
+                              </div>
                             </div>
                           </div>
                         </div>
                       </div>
                       <div class="card shadowedborder">
-                        likes: <h3>{{likes}}</h3>
+                        <div class="container">
+                          <div class="row ">
+                            <div class="col-md-4 ">
+                              <img class="  boarderless " [src]="icons.like"
+                                style="width: 40px; margin-left: 10px; margin-top: 20px;" />
+                            </div>
+                            <div class="col-md-8">
+                              <p>likes:</p>
+                              <h3>{{likes}}</h3>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                       <div class="card shadowedborder">
-                        Number of "shares" <h3>{{shares}}</h3> copied links and shares
+                        <div class="container">
+                          <div class="row ">
+                            <div class="col-md-4 ">
+                              <img class="  boarderless " [src]="icons.share"
+                                style="width: 40px; margin-left: 10px; margin-top: 20px;" />
+                            </div>
+                            <div class="col-md-8">
+                              Number of "shares" <h3>{{shares}}</h3><small class="text-muted">copied links and
+                                shares</small>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
