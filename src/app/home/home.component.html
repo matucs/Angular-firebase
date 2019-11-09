@@ -1,0 +1,134 @@
+<div class="container">
+  <div class="card">
+    <div class="card-body">
+      This That Analytics
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-body">
+      <a href="#">Dashboard</a>
+      <a href="#">Manage Polls</a>
+      <a href="#">Create Poll</a>
+      <a href="#">Poblish and Promote</a>
+      <a href="#">This That Messages</a>
+    </div>
+  </div>
+  <div class="card pink">
+    <div class="container">
+      <div class="row">
+        <div class="card col-md-4 pink boarderless" style="margin-top: 30px;">
+            <div class="card left-image boarderless ">
+                <div class="card-header boarderless " style="text-align: center; background-color: white;">
+                  <span class="badge badge-pill badge-light shadowedborder">Gold rims on the GT3 RS?</span>
+                  <span class="badge badge-pill shadowedborder">This</span>
+                </div>
+                <img class="img-thumbnail boarderless" [src]="imgUrl" />
+                <div class="card-footer boarderless" style="text-align: center; background-color: white;">
+                  <small class="card-text shadowedborder fontbold">Love them</small>
+                  <small class="card-text shadowedborder fontbold">Not a fan</small>
+                </div>
+            </div>
+            <div class="card left-comment pink boarderless">
+              <div class="card shadowedborder">
+                <div class="card-body">
+                  comments {{comments.length}}
+                </div>
+              </div>
+              <div *ngFor="let cmt of comments">
+                <div class="card shadowedborder">
+                  <div class="card-body">
+                    <div class="container">
+                      <div class="row">
+                        <div class="col-sm-4">
+                          <img [src]="cmt.user.img" style="width: 30px; height: 30px;border-radius: 50%;" />
+                        </div>
+                        <div class="col-sm-8">
+                          {{cmt.user.name}}
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                      {{cmt.content}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+        <div class="card col-md-8 pink boarderless">
+          <div class="card-body">
+            <div class="card right-header shadowedborder">
+              <div class="card-body">
+                <div class="container">
+                  <div class="row">
+                    <div class="card col-md-6 boarderless">
+                      <div class="card-boyd">
+                        <h5>"This" votes: {{This}}</h5>
+                        <h1 style="color: #FD659E;">72.3%</h1>
+                      </div>
+                    </div>
+                    <div class="card col-md-6 boarderless">
+                      <div class="card-boyd">
+                        <h5> "That" votes: {{That}}</h5>
+                        <h1>27.7%</h1>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card right-content boarderless pink">
+              <div class="card-body ">
+                <div class="container">
+                  <div class="row">
+                    <div class="card col-md-6 boarderless pink">
+                      <div class="card shadowedborder">
+                        <small> votes<h3>{{votes}}</h3></small>
+                      </div>
+                      <div class="card shadowedborder">
+                        <small> total reach in the past 7 days</small>
+                        <h3>6015</h3>
+                      </div>
+                      <div class="card shadowedborder">
+                        <div class="card-body">
+                          <small>Audience gender</small>
+                          <h3>{{male}}:{{female}}</h3>
+                          <small class="text-muted">male female</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card col-md-6 pink boarderless ">
+                      <div class="card boarderless pink">
+                        <div class="container">
+                          <div class="row">
+                            <div class="card  col-md-5 col-sm-5 col-xs-5  shadowedborder">
+                              <h2>TT</h2>
+                            </div>
+                            <div class="card  col-md-5 col-sm-5 col-xs-5  shadowedborder">
+                              <h2>Thread</h2>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="card shadowedborder">
+                        likes: <h3>{{likes}}</h3>
+                      </div>
+                      <div class="card shadowedborder">
+                        Number of "shares" <h3>{{shares}}</h3> copied links and shares
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card right-chart">
+              <div class="card-body">
+                <app-mainchart></app-mainchart>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
