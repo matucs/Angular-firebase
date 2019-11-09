@@ -48,6 +48,7 @@ export class HomeComponent implements OnInit {
       this.icons.thread = this._sanitizer.bypassSecurityTrustResourceUrl(Iconbase64.thread);
       this.icons.tick = this._sanitizer.bypassSecurityTrustResourceUrl(Iconbase64.tick);
       this.icons.total = this._sanitizer.bypassSecurityTrustResourceUrl(Iconbase64.total);
+      this.icons.message = this._sanitizer.bypassSecurityTrustResourceUrl(Iconbase64.message);
 
       temp.map(r => {
         var comment = new CommentModel();

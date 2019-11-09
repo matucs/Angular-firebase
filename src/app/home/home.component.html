@@ -50,26 +50,39 @@
             </div>
           </div>
           <div class="card left-comment pink boarderless">
-            <div class="card shadowedborder">
-              <div class="card-body">
-                comments {{comments.length}}
-              </div>
+            <div class="card shadowedborder" style=" width: 200px;">
+              comments {{comments.length}}
             </div>
             <div *ngFor="let cmt of comments">
-              <div class="card shadowedborder">
-                <div class="card-body">
-                  <div class="container">
-                    <div class="row">
-                      <div class="col-sm-4">
-                        <img [src]="cmt.user.img" style="width: 30px; height: 30px;border-radius: 50%;" />
-                      </div>
-                      <div class="col-sm-8">
-                        {{cmt.user.name}}
+              <div class="container">
+                <div class="row">
+                  <div class="card shadowedborder col-md-9">
+                    <div class="container">
+                      <div class="row">
+                        <div class="col-sm-4">
+                          <img [src]="cmt.user.img" style="width: 30px; height: 30px;border-radius: 50%;" />
+                        </div>
+                        <div class="col-sm-8">
+                          {{cmt.user.name}}
+                        </div>
                       </div>
                     </div>
+                    <div>
+                      {{cmt.content}}
+                    </div>
                   </div>
-                  <div>
-                    {{cmt.content}}
+                  <div class="col-md-2">
+                      <button type="button" class="btn btn-light" style="border-radius:50%; display: inline;
+                      margin: 5px;
+                      position: relative;">
+                          <span class="badge badge-light" style="  z-index: 1;
+                          position: absolute;
+                          right: 0;
+                          bottom: 0;
+                          margin-bottom: 24px;
+                          background-color: #d9534f;">{{0}}</span>
+                        <img [src]="icons.message" />
+                      </button>
                   </div>
                 </div>
               </div>

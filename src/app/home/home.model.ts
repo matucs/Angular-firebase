@@ -21,4 +21,5 @@ export class IconsSrc {
     gender: any;
     share: any;
     thread: any;
+    message: any;
 }
