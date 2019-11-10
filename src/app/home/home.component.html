@@ -1,16 +1,12 @@
-<div class="card">
     <div class="container">
-      <div class="row">
-        <div class="col-md-4 ">
-          <img class="  boarderless " [src]="icons.tick"
-            style="width: 40px; margin-left: 10px; margin-top: 20px;" />
-        </div>
-        <div class="col-md-8" >
-          <h6>Mehdi Bayat</h6>
-        </div>
+      <div class="row shadowedborder" style="width: 300px; margin-bottom: 30px;" >
+          <img class="col-md-4  boarderless " [src]="user.img"   style="width: 60px; height: 60px;"/>
+          <div class="col-md-5">
+            <h6>{{username}}</h6>
+            <small class="text-muted">{{user.gender}}</small>
+          </div>
       </div>
     </div>
-  </div>
 <div class="container">
   <div class="card boarderless">
     <div class="container">
@@ -56,17 +52,17 @@
               <span class="badge badge-pill badge-light shadowedborder">Gold rims on the GT3 RS?</span>
               <span class="badge badge-pill shadowedborder">This</span>
             </div>
-            <img class="img-thumbnail boarderless" [src]="imgUrl" />
+            <img class="img-thumbnail boarderless" [src]="thisthats.imgUrl" />
             <div class="card-footer boarderless" style="text-align: center; background-color: white;">
-              <small class="card-text shadowedborder fontbold">Love them</small>
-              <small class="card-text shadowedborder fontbold">Not a fan</small>
+              <button (click)="onThisThatClicked(true)" class="btn btn-light shadowedborder fontbold">Love them</button>
+              <button (click)="onThisThatClicked(false)" class="btn btn-light shadowedborder fontbold">Not a fan</button>
             </div>
           </div>
           <div class="card left-comment pink boarderless">
             <div class="card shadowedborder" style=" width: 200px;">
-              comments {{comments.length}}
+              comments {{thisthats.comments.length}}
             </div>
-            <div *ngFor="let cmt of comments">
+            <div *ngFor="let cmt of thisthats.comments">
               <div class="container">
                 <div class="row">
                   <div class="card shadowedborder col-md-9">
@@ -110,13 +106,13 @@
                   <div class="row">
                     <div class="card col-md-6 boarderless">
                       <div class="card-boyd">
-                        <h5>"This" votes: {{This}}</h5>
+                        <h5>"This" votes: {{thisthats.This}}</h5>
                         <h1 style="color: #FD659E;">72.3%</h1>
                       </div>
                     </div>
                     <div class="card col-md-6 boarderless">
                       <div class="card-boyd">
-                        <h5> "That" votes: {{That}}</h5>
+                        <h5> "That" votes: {{thisthats.That}}</h5>
                         <h1>27.7%</h1>
                       </div>
                     </div>
@@ -137,7 +133,7 @@
                                 style="width: 40px; margin-left: 10px; margin-top: 20px;" />
                             </div>
                             <div class="col-md-8">
-                              <small> votes<h3>{{votes}}</h3></small>
+                              <small> votes<h3>{{thisthats.votes}}</h3></small>
                             </div>
                           </div>
                         </div>
@@ -200,7 +196,7 @@
                             </div>
                             <div class="col-md-8">
                               <p>likes:</p>
-                              <h3>{{likes}}</h3>
+                              <h3>{{thisthats.likes}}</h3>
                             </div>
                           </div>
                         </div>
@@ -213,7 +209,7 @@
                                 style="width: 40px; margin-left: 10px; margin-top: 20px;" />
                             </div>
                             <div class="col-md-8">
-                              Number of "shares" <h3>{{shares}}</h3><small class="text-muted">copied links and
+                              Number of "shares" <h3>{{thisthats.shares}}</h3><small class="text-muted">copied links and
                                 shares</small>
                             </div>
                           </div>
@@ -226,7 +222,7 @@
             </div>
             <div class="card right-chart">
               <div class="card-body">
-                <app-mainchart></app-mainchart>
+                <app-mainchart [male]="[2000,9000,8000,7000,5000]" [female]="[2000,9000,8000,7000,5000]"></app-mainchart>
               </div>
             </div>
           </div>

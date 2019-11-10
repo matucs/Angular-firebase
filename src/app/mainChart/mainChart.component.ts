@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Chart } from 'chart.js';
 
 declare var _: any;
@@ -9,6 +9,8 @@ declare var _: any;
 })
 
 export class MainChartComponent implements OnInit {
+ @Input() male: [];
+ @Input() female: [];
   constructor() { }
   ngOnInit() {
 
@@ -24,14 +26,14 @@ data: {
         label: 'Male',
         backgroundColor: 'rgb(234, 24, 123)',
         borderColor: 'rgb(255, 0, 132)',
-        data: [70000,60000, 40000, 50000, 20000,0]
+        data: this.male
     },
     {
       barPercentage: 0.5,
         label: 'Female',
         backgroundColor: 'rgb(255, 99, 132)',
         borderColor: 'rgb(255, 0, 132)',
-        data: [40000,30000, 20000, 10000, 10000,0]
+        data: this.female
     },
   ]
 },

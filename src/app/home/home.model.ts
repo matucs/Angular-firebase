@@ -1,12 +1,25 @@
+export class ThisThatModel {
+    This: string;
+    That: string;
+    imgUrl: string;
+    likes: string;
+    shares: string;
+    votes: number;
+    reach: any;
+    comments = new Array<CommentModel>();
+    user = new Array<UserModel>();
+}
 export class CommentModel {
     content = "";
     parentId = "";
-    user: UserModel;
+    user= new UserModel();
 }
 export class UserModel {
     name = "";
     img = "";
     gender = "";
+    countryId = 0;
+    country =""
 }
 export class IconsSrc {
     thisThat: any;
