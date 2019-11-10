@@ -1,7 +1,8 @@
 import { Injectable } from "@angular/core";
 import { HomeComponent } from './home.component';
 import { AngularFireDatabase } from 'angularfire2/database';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { UserModel } from './home.model';
 
 @Injectable({
     providedIn: 'root' 
@@ -19,9 +20,9 @@ export class HomeService {
         .update({ this: Number(thisthat.This) + _this , that: Number(thisthat.That) + _that });
     }
     getUsers(): Observable<any> {
-        return this.db.list('/users',).valueChanges();
+        return this.db.list('/users').valueChanges();
     }
-    addUsers(user: any ): void {
-        this.db.list('users').push({ country: user.country, gender: user.gender, name: user.name  });
+    getCountries() {
+        return this.db.list('/countries').valueChanges();
     }
 }

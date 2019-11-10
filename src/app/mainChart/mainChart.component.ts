@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Chart } from 'chart.js';
+import { ChartModel } from '../home/home.model';
 
 declare var _: any;
 @Component({
@@ -9,15 +10,15 @@ declare var _: any;
 })
 
 export class MainChartComponent implements OnInit {
- @Input() male: [];
- @Input() female: [];
+ @Input() male = Array<ChartModel>();
+ @Input() female= Array<ChartModel>();
   constructor() { }
-  ngOnInit() {
+  ngOnInit() {    
+
 
     let chart = new Chart('canvas', {
 // The type of chart we want to create
 type: 'bar',
-
 // The data for our dataset
 data: {
     labels: ['Uk', 'Us', 'Germany', 'Canada', 'Singapour'],

@@ -16,10 +16,15 @@ export class CommentModel {
 }
 export class UserModel {
     name = "";
-    img = "";
+    img :any;
     gender = "";
     countryId = 0;
     country =""
+}
+export class ChartModel {
+    gender = "";
+    country ="";
+    value=0;
 }
 export class IconsSrc {
     thisThat: any;

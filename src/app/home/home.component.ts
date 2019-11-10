@@ -1,10 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { AngularFireDatabase } from 'angularfire2/database'
-import { CommentModel, IconsSrc, UserModel, ThisThatModel } from './home.model';
-import { Icons, Flags } from './../../assets/icons';
+import { Component, OnInit, IterableDiffers } from '@angular/core';
+import { CommentModel, IconsSrc, UserModel, ThisThatModel, ChartModel } from './home.model';
+import { Icons } from './../../assets/icons';
 import { DomSanitizer } from '@angular/platform-browser';
-import { calcPossibleSecurityContexts } from '@angular/compiler/src/template_parser/binding_parser';
 import { HomeService } from './home.service';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -22,8 +21,9 @@ export class HomeComponent implements OnInit {
   icons = new IconsSrc();
   user = new UserModel();
   username = "";
-  maleChartData: [];
-  femaleChartData: [];
+  countries = new Array<any>();
+  dataMale = new Array<ChartModel>();
+  dataFemale = new Array<ChartModel>();
 
 
   constructor(private service: HomeService, private _sanitizer: DomSanitizer) {
@@ -45,13 +45,17 @@ export class HomeComponent implements OnInit {
       })
 
       this.setIcons();
-      this.getUser();
-      this.service.addUsers(this.user);
+      this.getCountries();
+      //this.service.addUsers(this.user);
       this.setGender();
-      this.getGendersBasedOnCountries();
+      
 
     });
   }
+  setDataForChart() {
+
+  }
+
   onThisThatClicked(loveIt: boolean) {
     var _this = 0;
     var _that = 0;
@@ -59,57 +63,69 @@ export class HomeComponent implements OnInit {
     this.service.updateThisThats(this.thisthats, _this, _that);
   }
 
-  getGendersBasedOnCountries() {
+  getGendersBasedOnCountries(gender: string, country: string) {
+       this.service.getUsers().subscribe(r => {
+        var temp = this.users.filter(t => t.gender == gender && t.country == country);
+        if (temp.length > 0) {
+          var item = new ChartModel();
+          temp.map(t => {
+            item = { country: t.country, gender: t.gender, value: temp.length }
+          })
+          if (item.gender == 'Male') {
+            this.dataMale.push(item);
+          } else if (item.gender == 'Female') {
+            this.dataFemale.push(item);
+          }
+        }      
+
+      }); 
+
+  }         
+  setGender() {
     this.service.getUsers().subscribe(r => {
-      this.maleChartData = groupBy(r, 'country');
-      console.log(this.maleChartData.keys)
-      for(let value in Object.values(this.maleChartData)){
-      
-      }
+       this.users.push(r)
+      this.male = r.filter(t => t.gender == 'Male').length;
+      this.female = r.filter(t => t.gender == 'Female').length;
     });
-    console.log(this.maleChartData)
-}
-setGender() {
-  this.service.getUsers().subscribe(r => {
-    this.male = r.filter(t => t.gender == 'Male').length;
-    this.female = r.filter(t => t.gender == 'Female').length;
-  });
-}
-setIcons() {
-  var Iconbase64 = new Icons();
-  this.icons.thisThat = this._sanitizer.bypassSecurityTrustResourceUrl(Iconbase64.thisThat);
-  this.icons.createPoll = this._sanitizer.bypassSecurityTrustResourceUrl(Iconbase64.createPoll);
-  this.icons.dashboard = this._sanitizer.bypassSecurityTrustResourceUrl(Iconbase64.dashboard);
-  this.icons.gender = this._sanitizer.bypassSecurityTrustResourceUrl(Iconbase64.gender);
-  this.icons.like = this._sanitizer.bypassSecurityTrustResourceUrl(Iconbase64.like);
-  this.icons.managePoll = this._sanitizer.bypassSecurityTrustResourceUrl(Iconbase64.managePoll);
-  this.icons.publishAndPromote = this._sanitizer.bypassSecurityTrustResourceUrl(Iconbase64.publishAndPromote);
-  this.icons.share = this._sanitizer.bypassSecurityTrustResourceUrl(Iconbase64.share);
-  this.icons.tT = this._sanitizer.bypassSecurityTrustResourceUrl(Iconbase64.tT);
-  this.icons.thread = this._sanitizer.bypassSecurityTrustResourceUrl(Iconbase64.thread);
-  this.icons.tick = this._sanitizer.bypassSecurityTrustResourceUrl(Iconbase64.tick);
-  this.icons.total = this._sanitizer.bypassSecurityTrustResourceUrl(Iconbase64.total);
-  this.icons.message = this._sanitizer.bypassSecurityTrustResourceUrl(Iconbase64.message);
-}
-getUser() {
-  this.user.countryId = Math.floor(Math.random() * 5) + 1;
-  var path = new Flags().icon.filter(r => r.id == this.user.countryId)[0].path;
-  this.user.img = "./../../assets/flags/" + path;
-  this.user.country = path.substring(0, path.length - 4);
-  this.user.gender = Math.floor(Math.random() * 2) + 1 == 1 ? 'Female' : 'Male';
-  this.username = "user_" + Math.floor(Math.random() * 20000) + 1;
-  this.user.name = this.username;
-}
-ngOnInit() {
-}
+  }
+  setIcons() {
+    var Iconbase64 = new Icons();
+    this.icons.thisThat = this._sanitizer.bypassSecurityTrustResourceUrl(Iconbase64.thisThat);
+    this.icons.createPoll = this._sanitizer.bypassSecurityTrustResourceUrl(Iconbase64.createPoll);
+    this.icons.dashboard = this._sanitizer.bypassSecurityTrustResourceUrl(Iconbase64.dashboard);
+    this.icons.gender = this._sanitizer.bypassSecurityTrustResourceUrl(Iconbase64.gender);
+    this.icons.like = this._sanitizer.bypassSecurityTrustResourceUrl(Iconbase64.like);
+    this.icons.managePoll = this._sanitizer.bypassSecurityTrustResourceUrl(Iconbase64.managePoll);
+    this.icons.publishAndPromote = this._sanitizer.bypassSecurityTrustResourceUrl(Iconbase64.publishAndPromote);
+    this.icons.share = this._sanitizer.bypassSecurityTrustResourceUrl(Iconbase64.share);
+    this.icons.tT = this._sanitizer.bypassSecurityTrustResourceUrl(Iconbase64.tT);
+    this.icons.thread = this._sanitizer.bypassSecurityTrustResourceUrl(Iconbase64.thread);
+    this.icons.tick = this._sanitizer.bypassSecurityTrustResourceUrl(Iconbase64.tick);
+    this.icons.total = this._sanitizer.bypassSecurityTrustResourceUrl(Iconbase64.total);
+    this.icons.message = this._sanitizer.bypassSecurityTrustResourceUrl(Iconbase64.message);
+  }
+  getCountries() {
+    this.service.getCountries().subscribe(r => {
+      r.map(t => {
+        this.countries.push(t);
+      })
+
+      this.user.countryId = Math.floor(Math.random() * this.countries.length) + 1;
+      this.user.img = this._sanitizer.bypassSecurityTrustResourceUrl(this.countries[this.user.countryId - 1].flag);
+      this.user.country = this.countries[this.user.countryId - 1].name;
+      this.user.gender = Math.floor(Math.random() * 2) + 1 == 1 ? 'Female' : 'Male';
+      this.username = "user_" + Math.floor(Math.random() * 20000) + 1;
+      this.user.name = this.username;
+
+      this.countries.map(c =>{
+        this.getGendersBasedOnCountries('Male', c.name);
+        this.getGendersBasedOnCountries('Female', c.name);
+      })
+      
+    })
+  }
+  ngOnInit() {
+  }
 
 }
-const groupBy = (array, key) => {
-  return array.reduce((result, currentValue) => {
-    (result[currentValue[key]] = result[currentValue[key]] || []).push(
-      currentValue
-    );
-    return result;
-  }, {});
-};
 
