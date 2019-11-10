@@ -3,7 +3,6 @@ import { CommentModel, IconsSrc, UserModel, ThisThatModel, ChartModel } from './
 import { Icons } from './../../assets/icons';
 import { DomSanitizer } from '@angular/platform-browser';
 import { HomeService } from './home.service';
-import { Observable } from 'rxjs';
 
 
 @Component({
@@ -24,6 +23,9 @@ export class HomeComponent implements OnInit {
   countries = new Array<any>();
   dataMale = new Array<ChartModel>();
   dataFemale = new Array<ChartModel>();
+
+  chartDataMale = new Array<number>();
+  chartDataFemale = new Array<number>();
 
 
   constructor(private service: HomeService, private _sanitizer: DomSanitizer) {
@@ -49,13 +51,8 @@ export class HomeComponent implements OnInit {
       //this.service.addUsers(this.user);
       this.setGender();
 
-
     });
   }
-  setDataForChart() {
-
-  }
-
   onThisThatClicked(loveIt: boolean) {
     var _this = 0;
     var _that = 0;
@@ -66,24 +63,18 @@ export class HomeComponent implements OnInit {
   getGendersBasedOnCountries(gender: string, country: string) {
     this.service.getUsers().subscribe(r => {
       var temp = r.filter(t => t.gender == gender && t.country == country);
-      //if (temp.length > 0) {
       var item = new ChartModel();
       item = { country: country, gender: gender, value: temp.length }
       if (item.gender == 'Male') {
         this.dataMale.push(item);
+        this.chartDataMale.push(item.value);
       } else if (item.gender == 'Female') {
         this.dataFemale.push(item);
+        this.chartDataFemale.push(item.value);
       }
-      // temp.map(t => {
-      //   item = { country: t.country, gender: t.gender, value: temp.length }
-      //   if (item.gender == 'Male') {
-      //     this.dataMale.push(item.value);
-      //   } else if (item.gender == 'Female') {
-      //     this.dataFemale.push(item.value);
-      //   }
-      // })
-      // }      
-    });
+    }, err => console.error(err),
+      () => {
+      })
   }
   setGender() {
     this.service.getUsers().subscribe(r => {
@@ -124,7 +115,7 @@ export class HomeComponent implements OnInit {
       this.countries.map(c => {
         this.getGendersBasedOnCountries('Male', c.name);
         this.getGendersBasedOnCountries('Female', c.name);
-      })
+      });
 
     })
   }
