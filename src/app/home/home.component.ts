@@ -48,7 +48,7 @@ export class HomeComponent implements OnInit {
       this.getCountries();
       //this.service.addUsers(this.user);
       this.setGender();
-      
+
 
     });
   }
@@ -64,26 +64,30 @@ export class HomeComponent implements OnInit {
   }
 
   getGendersBasedOnCountries(gender: string, country: string) {
-       this.service.getUsers().subscribe(r => {
-        var temp = this.users.filter(t => t.gender == gender && t.country == country);
-        if (temp.length > 0) {
-          var item = new ChartModel();
-          temp.map(t => {
-            item = { country: t.country, gender: t.gender, value: temp.length }
-          })
-          if (item.gender == 'Male') {
-            this.dataMale.push(item);
-          } else if (item.gender == 'Female') {
-            this.dataFemale.push(item);
-          }
-        }      
-
-      }); 
-
-  }         
+    this.service.getUsers().subscribe(r => {
+      var temp = r.filter(t => t.gender == gender && t.country == country);
+      //if (temp.length > 0) {
+      var item = new ChartModel();
+      item = { country: country, gender: gender, value: temp.length }
+      if (item.gender == 'Male') {
+        this.dataMale.push(item);
+      } else if (item.gender == 'Female') {
+        this.dataFemale.push(item);
+      }
+      // temp.map(t => {
+      //   item = { country: t.country, gender: t.gender, value: temp.length }
+      //   if (item.gender == 'Male') {
+      //     this.dataMale.push(item.value);
+      //   } else if (item.gender == 'Female') {
+      //     this.dataFemale.push(item.value);
+      //   }
+      // })
+      // }      
+    });
+  }
   setGender() {
     this.service.getUsers().subscribe(r => {
-       this.users.push(r)
+      this.users.push(r)
       this.male = r.filter(t => t.gender == 'Male').length;
       this.female = r.filter(t => t.gender == 'Female').length;
     });
@@ -117,11 +121,11 @@ export class HomeComponent implements OnInit {
       this.username = "user_" + Math.floor(Math.random() * 20000) + 1;
       this.user.name = this.username;
 
-      this.countries.map(c =>{
+      this.countries.map(c => {
         this.getGendersBasedOnCountries('Male', c.name);
         this.getGendersBasedOnCountries('Female', c.name);
       })
-      
+
     })
   }
   ngOnInit() {

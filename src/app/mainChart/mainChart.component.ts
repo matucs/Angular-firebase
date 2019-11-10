@@ -10,42 +10,40 @@ declare var _: any;
 })
 
 export class MainChartComponent implements OnInit {
- @Input() male = Array<ChartModel>();
- @Input() female= Array<ChartModel>();
+  @Input() male = Array<ChartModel>();
+  @Input() female = Array<ChartModel>();
   constructor() { }
-  ngOnInit() {    
-
-
+  ngOnInit() {
     let chart = new Chart('canvas', {
-// The type of chart we want to create
-type: 'bar',
-// The data for our dataset
-data: {
-    labels: ['Uk', 'Us', 'Germany', 'Canada', 'Singapour'],
-    datasets: [{
-      barPercentage: 0.5,
-        label: 'Male',
-        backgroundColor: 'rgb(234, 24, 123)',
-        borderColor: 'rgb(255, 0, 132)',
-        data: this.male
-    },
-    {
-      barPercentage: 0.5,
-        label: 'Female',
-        backgroundColor: 'rgb(255, 99, 132)',
-        borderColor: 'rgb(255, 0, 132)',
-        data: this.female
-    },
-  ]
-},
+      // The type of chart we want to create
+      type: 'bar',
+      // The data for our dataset
+      data: {
+        labels: ['Uk', 'Us', 'Germany', 'Canada', 'Singapour'],
+        datasets: [{
+          barPercentage: 0.5,
+          label: 'Male',
+          backgroundColor: 'rgb(234, 24, 123)',
+          borderColor: 'rgb(255, 0, 132)',
+          data: this.male
+        },
+        {
+          barPercentage: 0.5,
+          label: 'Female',
+          backgroundColor: 'rgb(255, 99, 132)',
+          borderColor: 'rgb(255, 0, 132)',
+          data: this.female
+        },
+        ]
+      },
 
-// Configuration options go here
-options: {
-  scales: {
-    xAxes: [{ stacked: true }],
-    yAxes: [{ stacked: true }]
-  }
-}
+      // Configuration options go here
+      options: {
+        scales: {
+          xAxes: [{ stacked: true }],
+          yAxes: [{ stacked: true }]
+        }
+      }
     });
 
 
