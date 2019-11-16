@@ -24,12 +24,12 @@ export class HomeComponent implements OnInit {
   dataMale = new Array<ChartModel>();
   dataFemale = new Array<ChartModel>();
 
-  chartDataMale = new Array<number>();
-  chartDataFemale = new Array<number>();
+  chartDataMale = [];
+  chartDataFemale = [];
 
 
   constructor(private service: HomeService, private _sanitizer: DomSanitizer) {
-    var temp = this.service.getThisThats().subscribe(tt => {
+    var temp = this.service.getThisThats(1).subscribe(tt => {
       this.thisthats.imgUrl = tt[1].toString();
       this.thisthats.likes = tt[2].toString();
       this.thisthats.shares = tt[4].toString();
@@ -47,9 +47,6 @@ export class HomeComponent implements OnInit {
       })
 
       this.setIcons();
-      this.getCountries();
-      //this.service.addUsers(this.user);
-      this.setGender();
 
     });
   }
@@ -57,24 +54,20 @@ export class HomeComponent implements OnInit {
     var _this = 0;
     var _that = 0;
     loveIt ? _this = 1 : _that = 1;
-    this.service.updateThisThats(this.thisthats, _this, _that);
+    this.service.updateThisThatById(1, this.thisthats, _this, _that);
   }
 
   getGendersBasedOnCountries(gender: string, country: string) {
-    this.service.getUsers().subscribe(r => {
-      var temp = r.filter(t => t.gender == gender && t.country == country);
-      var item = new ChartModel();
-      item = { country: country, gender: gender, value: temp.length }
-      if (item.gender == 'Male') {
-        this.dataMale.push(item);
-        this.chartDataMale.push(item.value);
-      } else if (item.gender == 'Female') {
-        this.dataFemale.push(item);
-        this.chartDataFemale.push(item.value);
-      }
-    }, err => console.error(err),
-      () => {
-      })
+    var temp = this.users.filter(t => t.gender == gender && t.country == country);
+    var item = new ChartModel();
+    item = { country: country, gender: gender, value: temp.length }
+    if (item.gender == 'Male') {
+      this.dataMale.push(item);
+      this.chartDataMale.push(item.value);
+    } else if (item.gender == 'Female') {
+      this.dataFemale.push(item);
+      this.chartDataFemale.push(item.value);
+    }
   }
   setGender() {
     this.service.getUsers().subscribe(r => {
@@ -99,7 +92,12 @@ export class HomeComponent implements OnInit {
     this.icons.total = this._sanitizer.bypassSecurityTrustResourceUrl(Iconbase64.total);
     this.icons.message = this._sanitizer.bypassSecurityTrustResourceUrl(Iconbase64.message);
   }
-  getCountries() {
+
+  ngOnInit() {
+
+    this.service.getUsers().subscribe(r => {
+      this.users = r;
+    });
     this.service.getCountries().subscribe(r => {
       r.map(t => {
         this.countries.push(t);
@@ -116,10 +114,9 @@ export class HomeComponent implements OnInit {
         this.getGendersBasedOnCountries('Male', c.name);
         this.getGendersBasedOnCountries('Female', c.name);
       });
-
     })
-  }
-  ngOnInit() {
+    //this.service.addUsers(this.user);
+    this.setGender();
   }
 
 }

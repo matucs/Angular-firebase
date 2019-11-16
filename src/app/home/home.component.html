@@ -221,7 +221,7 @@
               </div>
             </div>
             <div class="card right-chart">
-              <div class="card-body">
+              <div *ngIf="chartDataMale.length > 0 && chartDataMale.length > 0" class="card-body">
                 <app-mainchart [male]="chartDataMale" [female]="chartDataFemale"></app-mainchart>
               </div>
             </div>

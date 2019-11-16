@@ -9,13 +9,13 @@ declare var _: any;
 })
 
 export class MainChartComponent implements OnInit {
-  @Input() male= new Array<number>();
-  @Input() female = new Array<number>();
+  @Input() male= [];
+  @Input() female = [];
 
   constructor() { }
   ngOnInit() {
 
-    let chart = new Chart('canvas', {
+    let chartdata =  {
       // The type of chart we want to create
       type: 'bar',
       // The data for our dataset
@@ -33,7 +33,7 @@ export class MainChartComponent implements OnInit {
           label: 'Female',
           backgroundColor: 'rgb(255, 99, 132)',
           borderColor: 'rgb(255, 0, 132)',
-          data: this.female
+          data: this.male
         },
         ]
       },
@@ -44,8 +44,9 @@ export class MainChartComponent implements OnInit {
           yAxes: [{ stacked: true }]
         }
       }
-    });
-  chart.update();
+    }
+console.log(this.male)
+    let chart = new Chart('canvas', chartdata);
   }
 
 }
