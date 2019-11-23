@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Chart } from 'chart.js';
+import { Observable } from 'rxjs';
 
 declare var _: any;
 @Component({
@@ -9,18 +10,21 @@ declare var _: any;
 })
 
 export class MainChartComponent implements OnInit {
-  @Input() male= [];
+  @Input() male = [];
   @Input() female = [];
+  @Input() lable = [];
+
+
 
   constructor() { }
   ngOnInit() {
 
-    let chartdata =  {
+    let datachart = {
       // The type of chart we want to create
       type: 'bar',
       // The data for our dataset
       data: {
-        labels: ['Uk', 'Us', 'Germany', 'Canada', 'Singapour'],
+        labels: this.lable,
         datasets: [{
           barPercentage: 0.5,
           label: 'Male',
@@ -44,9 +48,8 @@ export class MainChartComponent implements OnInit {
           yAxes: [{ stacked: true }]
         }
       }
-    }
-console.log(this.male)
-    let chart = new Chart('canvas', chartdata);
+    };
+    var chart = new Chart('canvas', datachart);
   }
 
 }
