@@ -1,12 +1,12 @@
-    <div class="container">
-      <div class="row shadowedborder" style="width: 300px; margin-bottom: 30px;" >
-          <img class="col-md-4  boarderless " [src]="user.img"   style="width: 60px; height: 60px;"/>
-          <div class="col-md-5">
-            <h6>{{username}}</h6>
-            <small class="text-muted">{{user.gender}}</small>
-          </div>
-      </div>
+<div class="container">
+  <div class="row shadowedborder" style="width: 300px; margin-bottom: 30px;">
+    <img class="col-md-4  boarderless " [src]="user.img" style="width: 60px; height: 60px;" />
+    <div class="col-md-5">
+      <h6>{{username}}</h6>
+      <small class="text-muted">{{user.gender}}</small>
     </div>
+  </div>
+</div>
 <div class="container">
   <div class="card boarderless">
     <div class="container">
@@ -54,8 +54,10 @@
             </div>
             <img class="img-thumbnail boarderless" [src]="thisthats.imgUrl" />
             <div class="card-footer boarderless" style="text-align: center; background-color: white;">
-              <button (click)="onThisThatClicked(true)" class="btn btn-light shadowedborder fontbold">Love them</button>
-              <button (click)="onThisThatClicked(false)" class="btn btn-light shadowedborder fontbold">Not a fan</button>
+              <button type="button" (click)="onThisThatClicked(true)" class="btn btn-light shadowedborder fontbold">Love
+                them</button>
+              <button type="button" (click)="onThisThatClicked(false)" class="btn btn-light shadowedborder fontbold">Not
+                a fan</button>
             </div>
           </div>
           <div class="card left-comment pink boarderless">
@@ -81,17 +83,17 @@
                     </div>
                   </div>
                   <div class="col-md-2">
-                      <button  class="btn btn-light" style="border-radius:50%; display: inline;
+                    <button class="btn btn-light" style="border-radius:50%; display: inline;
                       margin: 5px;
                       position: relative;">
-                          <span class="badge badge-light" style="  z-index: 1;
+                      <span class="badge badge-light" style="  z-index: 1;
                           position: absolute;
                           right: 0;
                           bottom: 0;
                           margin-bottom: 24px;
                           background-color: #d9534f;">{{0}}</span>
-                        <img [src]="icons.message" />
-                      </button>
+                      <img [src]="icons.message" />
+                    </button>
                   </div>
                 </div>
               </div>
@@ -107,13 +109,13 @@
                     <div class="card col-md-6 boarderless">
                       <div class="card-boyd">
                         <h5>"This" votes: {{thisthats.This}}</h5>
-                        <h1 style="color: #FD659E;">72.3%</h1>
+                        <h1 style="color: #FD659E;">{{thisPercent}}%</h1>
                       </div>
                     </div>
                     <div class="card col-md-6 boarderless">
                       <div class="card-boyd">
                         <h5> "That" votes: {{thisthats.That}}</h5>
-                        <h1>27.7%</h1>
+                        <h1>{{tahtPercent}}%</h1>
                       </div>
                     </div>
                   </div>
@@ -221,7 +223,8 @@
               </div>
             </div>
             <div class="card right-chart">
-              <div class="card-body">
+              <div class="card-body"
+                *ngIf="chartDataFemale.length == countries.length && chartDataMale.length == countries.length">
                 <app-mainchart [male]="chartDataMale" [female]="chartDataFemale"></app-mainchart>
               </div>
             </div>
